@@ -1,0 +1,23 @@
+[Unit]
+Description=Go Script Runner Service
+After=network.target
+
+[Service]
+# 指定工作目录
+WorkingDirectory=/usr/local/go-script-runner/
+# 可执行文件路径
+ExecStart=/usr/local/go-script-runner/main -dir /usr/local/go-script-runner/scripts
+# 如果服务崩溃，重启它
+Restart=always
+# 重启前的延迟时间
+RestartSec=5
+# 服务类型
+Type=simple
+# 标准输出和错误输出日志路径
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=go-script-runner
+
+[Install]
+# 定义服务安装时的目标
+WantedBy=multi-user.target
